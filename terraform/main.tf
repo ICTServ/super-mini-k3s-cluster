@@ -13,3 +13,4 @@ provider "proxmox" {
   pm_api_token_id     = "root@pam!terraform_token_id"
   pm_api_token_secret = var.proxmox_api_key
 }
+
