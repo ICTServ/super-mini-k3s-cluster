@@ -9,6 +9,8 @@
 .idea/**/dictionaries
 .idea/**/shelf
 
+terraform/credential.auto.tfvars
+
 # AWS User-specific
 .idea/**/aws.xml
 
