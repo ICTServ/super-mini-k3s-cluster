@@ -4,10 +4,10 @@ variable "proxmox_api_key" {
   sensitive   = true
 }
 
+
 variable "proxmox_host" {
   description = "Proxmox host"
   type        = string
-  default     = "tormenta.xmen.local"
 }
 
 variable "proxmox_api_url" {
@@ -15,10 +15,9 @@ variable "proxmox_api_url" {
 }
 variable "template_name" {
   type    = string
-  default = "cloud-base-ubuntu"
+  default = "ubuntu-cloud"
 }
 variable "ansible_user" {
-  default = "admin"
   type    = string
 }
 
@@ -27,5 +26,9 @@ variable "private_key_path" {
 }
 
 variable "public_key_path" {
+  type = string
+}
+
+variable "admin_password" {
   type = string
 }

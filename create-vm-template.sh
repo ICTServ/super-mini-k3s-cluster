@@ -27,11 +27,13 @@ sudo qm set 8000 --agent enabled=1
 
 # At this point, use the Proxmox UI to configure cloud-init options for the VM:
 # - Add a user (e.g., 'admin')
+# - i the image,as in this case, is an unbutu, the user en cloudinit should be ubuntu
 # - Add your public SSH key
 # - Enable DHCP
 
 # Once the above configuration is completed, convert the VM into a template
 sudo qm template 8000
+
 
 # Create user for terrform
 pveum role add TerraformProv -privs "Datastore.AllocateSpace Datastore.Audit Pool.Allocate Sys.Audit Sys.Console Sys.Modify VM.Allocate VM.Audit VM.Clone VM.Config.CDROM VM.Config.Cloudinit VM.Config.CPU VM.Config.Disk VM.Config.HWType VM.Config.Memory VM.Config.Network VM.Config.Options VM.Migrate VM.Monitor VM.PowerMgmt"

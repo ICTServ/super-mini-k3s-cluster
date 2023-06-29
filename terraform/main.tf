@@ -12,16 +12,23 @@ provider "proxmox" {
   pm_tls_insecure     = true
   pm_api_token_id     = "root@pam!terraform_token_id"
   pm_api_token_secret = var.proxmox_api_key
+  pm_debug            = true
+  pm_log_levels       = {
+    _default = "debug"
+  }
 }
 
 resource "proxmox_vm_qemu" "vm" {
-  count       = 1
+
+  count       = 3
   target_node = var.proxmox_host
-  name        = "k3s-node-${count.index}"
+  clone       = var.template_name
+  name        = "k3s-node-${count.index+1}"
 
   agent = 1 # is the qemu agent installed?
 
-  os_type  = "cloud-init" # The OS type of the image clone
+  os_type = "cloud-init" # The OS type of the image clone
+
   cores    = 2 # number of CPU cores
   sockets  = 1 # number of CPU sockets
   cpu      = "host" # The CPU type
@@ -42,18 +49,14 @@ resource "proxmox_vm_qemu" "vm" {
     bridge = "vmbr0"
   }
 
-  ipconfig0 = "ip=192.168.8.11${count.index}/24,gw=192.168.8.1"
-
-  # provisision
-  provisioner "remote-exec" {
-    inline = ["sudo apt update", "sudo apt upgrade -y"]
-    connection {
-      host        = "192.168.8.11${count.index}"
-      type        = "ssh"
-      user        = "admin"
-      private_key = file(var.private_key_path)
-    }
+  lifecycle {
+    ignore_changes = [
+      sshkeys,
+      network,
+    ]
   }
 
+  ipconfig0 = "ip=192.168.8.11${count.index+1}/24,gw=192.168.8.1"
 }
+
 
