@@ -56,7 +56,7 @@ resource "proxmox_vm_qemu" "vm" {
     ]
   }
 
-  ipconfig0 = "ip=192.168.8.11${count.index+1}/24,gw=192.168.8.1"
+  ipconfig0 = "ip=192.168.50.10${count.index+1}/24,gw=192.168.50.1"
 }
 
 
