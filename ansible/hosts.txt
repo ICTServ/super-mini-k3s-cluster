@@ -2,16 +2,16 @@
 # used by ansible to determine which actions to run on which hosts
 
 [all]
-192.168.8.111
-192.168.8.112
-192.168.8.113
+192.168.50.101
+192.168.50.102
+192.168.50.103
 
 [kube_server]
-192.168.8.111
+192.168.50.101
 
 [kube_agents]
-192.168.8.112
-192.168.8.113
+192.168.50.102
+192.168.50.103
 
 [kube_storage]
 #this should probably be nfs sever , probably the nas
